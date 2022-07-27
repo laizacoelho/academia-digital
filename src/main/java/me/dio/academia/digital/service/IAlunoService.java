@@ -44,5 +44,7 @@ public interface IAlunoService {
   void delete(Long id);
 
   List<AvaliacaoFisica> getAllAvaliacaoFisicaID(Long id) throws Exception;
+
+  List<Aluno> getAlunosPorNascimento(String dataDeNascimento);
 }
 

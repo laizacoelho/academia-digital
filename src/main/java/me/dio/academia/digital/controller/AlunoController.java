@@ -8,6 +8,7 @@ import me.dio.academia.digital.service.AlunoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public Aluno create(@RequestBody AlunoForm form) {
+    public Aluno create(@Valid @RequestBody AlunoForm form) {
         return service.create(form);
     }
 
@@ -41,10 +42,15 @@ public class AlunoController {
         return service.get(id);
     }
 
-
     @PutMapping("/{id}")
     public Aluno update(@PathVariable Long id, @RequestBody AlunoUpdateForm updateForm) throws Exception {
         return service.update(id, updateForm);
+    }
+
+    @GetMapping("/aniversarios")
+    public List<Aluno> getAniversarios(@RequestParam(value = "dataDeNascimento", required = false)
+                                  String dataDeNascimento) {
+        return service.getAlunosPorNascimento(dataDeNascimento);
     }
 
 
